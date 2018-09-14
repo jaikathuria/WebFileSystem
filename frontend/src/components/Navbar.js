@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { pathArray } from './../utils/_helper'
 
 class Navbar extends Component {
+
 	updateQuery(event){
 		const query = event.target.value
 		this.props.updateQuery(query)
@@ -44,7 +45,7 @@ class Navbar extends Component {
 										className="form-control pull-right group-input" 
 										placeholder="Search"
 										value={this.props.query}
-										onChange={this.updateQuery.bind()}
+										onChange={this.updateQuery.bind(this)}
 									/>
 								</div>
 							</form>
