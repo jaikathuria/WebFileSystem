@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 
 
+
 export default class File extends Component {
 
 	getImageSrc(){
@@ -11,12 +12,14 @@ export default class File extends Component {
 			return require('./../images/Image.png')
 		case '.mp3':
 			return require('./../images/Music.png')
+		case 'add-file':
+			return require('./../images/AddFile.png')
 		default:
 			return require('./../images/File.png') // blank file
 		}
 	}
 
-	onClick = () => {
+	onClick = (event) => {
 		this.props.setSelected()
 	}
 

@@ -31,5 +31,6 @@ export const getCurrentDirectory = (url,root) => {
 			return []
 		}
 	}
+	if(root.type !== 'directory') return null
 	return Object.values(root.content)
 }

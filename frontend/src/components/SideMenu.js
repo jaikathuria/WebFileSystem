@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import classnames from 'classnames'
 import { Link } from 'react-router-dom'
+import { withRouter } from 'react-router'
 
-
-export default class SideMenu extends Component {
+class SideMenu extends Component {
 	constructor() {
 		super()
 		this.onClick = this.onClick.bind(this)
@@ -14,11 +14,7 @@ export default class SideMenu extends Component {
 			console.log(this.props)
 			this.props.toggleSubMenu(e)
 		} else {
-			
-			this.props.activateMe({
-				newLocation: this.props.to,
-				selectedMenuLabel: this.props.label,
-			})
+			this.props.history.push(`/${this.props.to}`)
 		}
 }
 
@@ -39,3 +35,5 @@ export default class SideMenu extends Component {
 		)
 	}
 }
+
+export default withRouter(SideMenu)

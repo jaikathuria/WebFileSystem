@@ -7,13 +7,14 @@ import SideMenu from './SideMenu'
 import Explorer from './Explorer'
 
 /* Import Utils */
-import { getDirectories, getCurrentDirectory } from './../utils/_helper'
+import { getDirectories, getCurrentDirectory, pathArray } from './../utils/_helper'
 
 export default class Wrapper extends Component {
 
 	state = {
 		currentDirectory: [],
-		directories: []
+		directories: [],
+		activePath: ""
 	}
 
 	componentDidMount(){
@@ -25,7 +26,8 @@ export default class Wrapper extends Component {
 	updateCurrentDirectory(url){
 		const currentDirectory = getCurrentDirectory(url, this.props.root)
 		this.setState({
-			currentDirectory
+			currentDirectory,
+			activePath: pathArray(url)[-1]
 		})
 	}
 	
@@ -42,12 +44,12 @@ export default class Wrapper extends Component {
 	}
 
 	render(){
-		const directories = getDirectories(JSON.parse(JSON.stringify(this.props.root)))	
+		const directories = getDirectories(JSON.parse(JSON.stringify(this.props.root)))
 		return (
 			<div>
 				<MetisMenu 
 					content={directories}
-					activeLinkFromLocation={true}
+					activeLinkLabel={this.state.activePath} 
 					LinkComponent={SideMenu}
 				/>
 				<Explorer 
