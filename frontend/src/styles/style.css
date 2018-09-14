@@ -1,0 +1,111 @@
+.metismenu {
+    position: fixed;
+    width: 280px;
+    bottom: 0;
+    left: 0;
+    top: 0;
+    background: #F9FAFC;
+   
+}
+.metismenu::after {
+    box-shadow: none;
+    -webkit-box-shadow: none;
+}
+
+.metismenu-container:first-child{
+    margin-top: 50px;
+}
+
+.metismenu-item {
+    padding-left: 15px;
+}
+
+.metismenu-container.visible {
+    padding: .5em 0;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+}
+
+.metismenu-container:hover {
+    
+}
+
+.metismenu-link.active  {
+    background: inherit;
+    color: #f53
+}
+
+.metismenu-link{
+    text-shadow: none;
+    color: #2F363F;
+    cursor: pointer;
+}
+.metismenu-container .metismenu-link:hover {
+    color: #f53;
+    background: #EEEFF1;
+}
+
+.margin-left-280 {
+    margin-left: 280px;
+}
+
+.margin-top-10 {
+    margin-top: 10px;
+}
+
+.navbar-brand{
+    margin-right: 15px;
+}
+
+ol.breadcrumb {
+    padding: 15px;
+    margin-bottom: 0px;
+}
+
+.inner-addon { 
+    position: relative; 
+}
+.group-icon {
+    position: absolute;
+    padding: 10px;
+    pointer-events: none;
+    right: 0px;
+}
+
+.group-input { 
+    padding-right: 30px; 
+}
+
+.file-icon {
+    padding: 15px;
+}
+
+.image-wrapper {
+    margin: 0 auto;
+    width: 150px;
+    padding: 35px 20px;
+    text-align: center;
+}
+
+.image-wrapper img {
+    width: 100px;
+}
+
+.image-wrapper:hover {
+    background: #E6F5FF;
+}
+.right-addon {
+    float: right;
+}
+
+.image-caption {
+    font-weight: 400;
+}
+
+
+.popup-content {
+    padding: 30px;
+    color: #787878;
+    background-color: #fcf7f8;
+    border: 1px solid rgba(0,0,0,.05);
+}
