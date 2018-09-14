@@ -6,9 +6,7 @@ import { withRouter } from 'react-router'
 	state = {
 		selected: null
 	}
-
 	updateSelected(file){
-		
 		if(this.state.selected !== null){
 			if(file.type === 'directory'){
 				if (file.url === this.state.selected.url) {
@@ -22,7 +20,6 @@ import { withRouter } from 'react-router'
 		this.setState({
 			selected: file
 		})
-		
 	}
 
 	render(){

@@ -7,6 +7,10 @@ export default class File extends Component {
 		switch(this.props.file.type){
 		case 'directory':
 			return require('./../images/Folder.png')
+		case '.jpg':
+			return require('./../images/Image.png')
+		case '.mp3':
+			return require('./../images/Music.png')
 		default:
 			return require('./../images/File.png') // blank file
 		}

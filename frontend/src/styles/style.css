@@ -85,6 +85,7 @@ ol.breadcrumb {
     width: 150px;
     padding: 35px 20px;
     text-align: center;
+    cursor: pointer;
 }
 
 .image-wrapper img {
@@ -92,7 +93,7 @@ ol.breadcrumb {
 }
 
 .image-wrapper:hover {
-    background: #E6F5FF;
+    background: rgb(216, 216, 216);
 }
 .right-addon {
     float: right;
@@ -100,12 +101,4 @@ ol.breadcrumb {
 
 .image-caption {
     font-weight: 400;
-}
-
-
-.popup-content {
-    padding: 30px;
-    color: #787878;
-    background-color: #fcf7f8;
-    border: 1px solid rgba(0,0,0,.05);
 }

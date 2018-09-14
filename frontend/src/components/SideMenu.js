@@ -11,7 +11,7 @@ export default class SideMenu extends Component {
 
 	onClick(e) {
 		if (this.props.hasSubMenu) {
-			console.log(this.props.to)
+			console.log(this.props)
 			this.props.toggleSubMenu(e)
 		} else {
 			
