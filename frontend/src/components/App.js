@@ -4,7 +4,7 @@ import Wrapper from './Wrapper'
 
 /* Import Utils */
 import { getRootDirectory } from './../utils/_explorerAPI'
-import { addToRoot } from './../utils/_helper'
+import { addToRoot, deleteFromRoot } from './../utils/_helper'
  
 export default class App extends Component {
 	state = {
@@ -27,6 +27,14 @@ export default class App extends Component {
 		})
 	}
 
+	deleteFileFromRoot(url){
+		console.log("I am being called ")
+		const { root } = this.state
+		this.setState({
+			root: deleteFromRoot(root, url)
+		})
+	}
+
 	render(){		
 		return (
 			<Switch>
@@ -35,7 +43,12 @@ export default class App extends Component {
 				)}/>
 				<Route
 					path="/:path"
-					render={(props) => <Wrapper {...props} root={this.state.root} addFileToRoot={ this.addFileToRoot.bind(this) } />}
+					render={(props) => <Wrapper 
+										{...props} 
+										root={this.state.root} 
+										addFileToRoot={this.addFileToRoot.bind(this)} 
+										deleteFileFromRoot={this.deleteFileFromRoot.bind(this)}
+									/>}
 				/>
 			</Switch>
 		)

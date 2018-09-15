@@ -37,9 +37,11 @@ export const getCurrentDirectory = (url,root) => {
 
 
 export const addToRoot = (root, url, file) => {
+	console.log("I am also called")
 	const array = pathArray(url)
 	if(array.length === 0) {
 		if(root.type === 'directory'){
+			console.log(root)
 			root.content[file.name] = file
 		}
 		return JSON.parse(JSON.stringify(root))
@@ -47,6 +49,21 @@ export const addToRoot = (root, url, file) => {
 	root.content[array[0]] = addToRoot(root.content[array[0]],array.slice(1).join('/'),file)
 	return JSON.parse(JSON.stringify(root))
 }
+
+export const deleteFromRoot = (root,url) => {
+	const array = pathArray(url)
+	const toRemove = array.pop()
+	if(array.length === 0){
+		if(root.type === 'directory'){
+			delete root.content[toRemove]
+		}
+		return JSON.parse(JSON.stringify(root))
+	}
+	array.push(toRemove)
+	root.content[array[0]] = deleteFromRoot(root.content[array[0]],array.slice(1).join('/'))
+	return JSON.parse(JSON.stringify(root))
+}
+
 
 export const createFileObject = (name, creator, url, size, directory) => {
 	const array = pathArray(url)

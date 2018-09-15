@@ -59,6 +59,7 @@ export default class Explorer extends Component {
 					currentDirectory={currentDirectory}
 					openModal={this.onOpenModal.bind(this)}
 					openAdd={this.onOpenAdd.bind(this)}
+					deleteFileFromRoot={this.props.deleteFileFromRoot}
 					query={validQuery}
 				/>
 				<InfoModal 

@@ -24,13 +24,15 @@ import RightClickMenu from './RightClickMenu'
 	}
 
 	handleClick(e,data,target){
+		const url = target.getAttribute('url')
 		if(data.type === 'OPEN'){
-			this.props.history.push(`/${target.getAttribute('url')}`)
+			this.props.history.push(`/${url}`)
 		} else if (data.type === 'INFO') {
 			const name = target.getAttribute('name')
-			const url = target.getAttribute('url')
 			const type = target.getAttribute('type')
 			this.props.openModal({name, url, type})
+		} else {
+			this.props.deleteFileFromRoot(url)
 		}
 	}
 

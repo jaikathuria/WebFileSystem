@@ -57,6 +57,7 @@ export default class Wrapper extends Component {
 				<Explorer 
 					currentDirectory={this.state.currentDirectory}
 					addFileToRoot={this.props.addFileToRoot}
+					deleteFileFromRoot={this.props.deleteFileFromRoot}
 				/>
 			</div>
 		)
