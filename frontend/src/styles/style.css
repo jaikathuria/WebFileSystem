@@ -150,4 +150,18 @@ ol.breadcrumb {
     pointer-events: auto;
     z-index: 9999;
 }
-    
+
+.custom-overlay {
+    background: rgba(85, 85, 85, 0.7);
+}
+.custom-modal {
+    max-width: 400px;
+    width: 100%;
+    background: #FFFFFF;
+    border: 1px solid rgba(221,224,228,0.70);
+    box-shadow: 0 16px 64px 0 rgba(0,0,0,0.08);
+    border-radius: 8px;
+}
+.padding-top-50 {
+    padding-top: 50px;
+}

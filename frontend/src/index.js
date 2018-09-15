@@ -9,6 +9,7 @@ import './styles/style.css'
 import 'font-awesome/css/font-awesome.min.css'
 
 
+
 /* Import Components */
 import App from './components/App'
 

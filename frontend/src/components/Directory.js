@@ -2,10 +2,10 @@ import React, { Component } from 'react'
 import File from './File'
 import { withRouter } from 'react-router'
 import { ContextMenu, MenuItem, ContextMenuTrigger } from "react-contextmenu"
-
+ 
  class Directory extends Component {
 	state = {
-		selected: null
+		selected: null,
 	}
 	updateSelected(file){
 		if(this.state.selected !== null){
@@ -21,6 +21,17 @@ import { ContextMenu, MenuItem, ContextMenuTrigger } from "react-contextmenu"
 		this.setState({
 			selected: file
 		})
+	}
+
+	handClick(e,data,target){
+		if(data.type === 'OPEN'){
+			this.props.history.push(`/${target.getAttribute('url')}`)
+		} else if (data.type === 'INFO') {
+			const name = target.getAttribute('name')
+			const url = target.getAttribute('url')
+			const type = target.getAttribute('type')
+			this.props.openModal({name, url, type})
+		}
 	}
 
 	render(){
@@ -44,22 +55,22 @@ import { ContextMenu, MenuItem, ContextMenuTrigger } from "react-contextmenu"
 							/>
 						</ContextMenuTrigger>)
 				}
-				<ContextMenu id={'DIRECTORY_CONTEXT_MENU'}>
-					<MenuItem data={{foo: 'bar'}}>
+				<ContextMenu id={'DIRECTORY_CONTEXT_MENU'} >
+					<MenuItem data={{type: 'OPEN'}} onClick={this.handClick.bind(this)}>
 						OPEN
 					</MenuItem>
-					<MenuItem data={{foo: 'bar'}}>
+					<MenuItem data={{type: 'INFO'}} onClick={this.handClick.bind(this)}>
 						GET INFO
 					</MenuItem>
-					<MenuItem data={{foo: 'bar'}}>
+					<MenuItem data={{type: 'DELETE'}} onClick={this.handClick.bind(this)}>
 						DELETE
 					</MenuItem>
 				</ContextMenu>
-				<ContextMenu id={'FILE_CONTEXT_MENU'}>
-					<MenuItem data={{foo: 'bar'}}>
+				<ContextMenu id={'FILE_CONTEXT_MENU'} >
+					<MenuItem data={{type: 'INFO'}} onClick={this.handClick.bind(this)}>
 						GET INFO
 					</MenuItem>
-					<MenuItem data={{foo: 'bar'}}>
+					<MenuItem data={{type: 'DELETE'}} onClick={this.handClick.bind(this)}>
 						DELETE
 					</MenuItem>
 				</ContextMenu>

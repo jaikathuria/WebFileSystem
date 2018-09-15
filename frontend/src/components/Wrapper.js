@@ -14,8 +14,9 @@ export default class Wrapper extends Component {
 	state = {
 		currentDirectory: [],
 		directories: [],
-		activePath: ""
+		activePath: "",
 	}
+
 
 	componentDidMount(){
 		this.unlisten = this.props.history.listen(location => {
