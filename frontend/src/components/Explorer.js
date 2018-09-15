@@ -68,7 +68,7 @@ export default class Explorer extends Component {
 				/>
 				<AddModal 
 					open={addOpen}
-					addFiletoRoot={this.props.addFiletoRoot}
+					addFileToRoot={this.props.addFileToRoot}
 					onCloseModal={this.onCloseAdd.bind(this)}
 				/>
 			</div>

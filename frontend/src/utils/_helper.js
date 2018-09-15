@@ -37,7 +37,35 @@ export const getCurrentDirectory = (url,root) => {
 
 
 export const addToRoot = (root, url, file) => {
-	root = JSON.parse(JSON.stringify(root))
-	 // Logic to Add File to given url of the root
-	return root	
+	const array = pathArray(url)
+	if(array.length === 0) {
+		if(root.type === 'directory'){
+			root.content[file.name] = file
+		}
+		return JSON.parse(JSON.stringify(root))
+	}
+	root.content[array[0]] = addToRoot(root.content[array[0]],array.slice(1).join('/'),file)
+	return JSON.parse(JSON.stringify(root))
+}
+
+export const createFileObject = (name, creator, url, size, directory) => {
+	const array = pathArray(url)
+	const file = {
+		name,
+		size,
+		creator,
+		url: array.length !== 0 ? `root/${array.join('/')}/${name}` : `root/${name}`
+	}
+	if (directory){
+		file.type = 'directory'
+		file.content = {}
+	} else {
+		const lastPeriod = name.lastIndexOf('.')
+		if(lastPeriod <= 0){
+			file.type = 'system'
+		} else {
+			file.type = name.slice(lastPeriod)
+		}
+	}
+	return file
 }

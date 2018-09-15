@@ -21,6 +21,7 @@ export default class App extends Component {
 	}
 
 	addFileToRoot(url,file){
+		const { root } = this.state
 		this.setState({
 			root: addToRoot(root, url, file)
 		})

@@ -36,6 +36,7 @@ export default class Wrapper extends Component {
 		const root = this.props.root
 		const newRoot = newProps.root
 		if(root !== newRoot){
+			console.log("Root Got Changed")
 			this.updateCurrentDirectory(this.props.location.pathname)
 		}
 	}
@@ -55,7 +56,7 @@ export default class Wrapper extends Component {
 				/>
 				<Explorer 
 					currentDirectory={this.state.currentDirectory}
-					addFiletoRoot={this.props.addFiletoRoot}
+					addFileToRoot={this.props.addFileToRoot}
 				/>
 			</div>
 		)

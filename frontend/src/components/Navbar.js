@@ -12,8 +12,7 @@ class Navbar extends Component {
 
 	render(){
 		const paths = pathArray(this.props.location.pathname)
-		
-		const parentURL = paths.length !== 0 ? `/${paths.slice(0,paths.length-1).join('/')}` : ""
+		const parentURL = paths.length > 1 ? `/${paths.slice(0,paths.length-1).join('/')}` : ""
 		return (
 			<nav className="navbar navbar-default margin-top-10">
 				<div className="container-fluild">
