@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Navbar from './Navbar';
+import Navbar from './Navbar'
 import Directory from './Directory'
 import InfoModal from './InfoModal'
 import AddModal from './AddModal'
@@ -8,7 +8,7 @@ import AddModal from './AddModal'
 export default class Explorer extends Component {
 	
 	state = {
-		query: "",
+		query: '',
 		infoOpen: false,
 		addOpen: false,
 		info: null
@@ -25,7 +25,7 @@ export default class Explorer extends Component {
 	}
 	
 	onCloseModal = () => {
-		this.setState({ infoOpen: false, info: null });
+		this.setState({ infoOpen: false, info: null })
 	}
 
 	onOpenAdd = () => {
@@ -40,7 +40,7 @@ export default class Explorer extends Component {
 	componentDidUpdate(newProps){
 		if(this.props.currentDirectory !== newProps.currentDirectory){
 			this.setState({
-				query: ""
+				query: ''
 			})
 		}
 	}
@@ -48,7 +48,7 @@ export default class Explorer extends Component {
 	render(){
 		let {currentDirectory} = this.props
 		const { query, infoOpen, info, addOpen } = this.state
-		const validQuery = (query.trim() !== "")
+		const validQuery = (query.trim() !== '')
 		if (validQuery){
 			currentDirectory = currentDirectory.filter(file => file.name.toLowerCase().match(query.toLowerCase()) !== null)
 		} 

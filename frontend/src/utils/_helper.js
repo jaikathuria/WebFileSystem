@@ -1,8 +1,8 @@
-export const getDirectories = directory => {
+export const getDirectories = (directory) => {
 	const files = []
 	const allContents = directory.content || {}
-	for (let file of Object.keys(allContents)){
-		if(allContents[file].type === 'directory'){
+	for (const file of Object.keys(allContents)) {
+		if (allContents[file].type === 'directory') {
 			allContents[file].label = allContents[file].name
 			allContents[file].to = `/${allContents[file].url}`
 			allContents[file].icon = 'folder-o'
@@ -13,17 +13,18 @@ export const getDirectories = directory => {
 	return files
 }
 
-export const pathArray = url => {
+export const pathArray = (url) => {
 	const array = url.split('/')
 	return array.filter(path => path !== '' && path !== 'root')
 }
 
-export const getCurrentDirectory = (url,root) => {
+export const getCurrentDirectory = (url, root) => {
+	let newRoot = root
 	const array = pathArray(url)
-	for (let folder of array){
-		if('content' in root){
-			if(folder in root.content){
-				root = root.content[folder]
+	for (const folder of array) {
+		if ('content' in newRoot) {
+			if (folder in newRoot.content) {
+				newRoot = newRoot.content[folder]
 			} else {
 				return null
 			}
@@ -31,37 +32,37 @@ export const getCurrentDirectory = (url,root) => {
 			return []
 		}
 	}
-	if(root.type !== 'directory') return null
-	return Object.values(root.content)
+	if (newRoot.type !== 'directory') return null
+	return Object.values(newRoot.content)
 }
 
 
 export const addToRoot = (root, url, file) => {
-	console.log("I am also called")
+	const newRoot = JSON.parse(JSON.stringify(root))
 	const array = pathArray(url)
-	if(array.length === 0) {
-		if(root.type === 'directory'){
-			console.log(root)
-			root.content[file.name] = file
+	if (array.length === 0) {
+		if (newRoot.type === 'directory') {
+			newRoot.content[file.name] = file
 		}
-		return JSON.parse(JSON.stringify(root))
+		return newRoot
 	}
-	root.content[array[0]] = addToRoot(root.content[array[0]],array.slice(1).join('/'),file)
-	return JSON.parse(JSON.stringify(root))
+	newRoot.content[array[0]] = addToRoot(newRoot.content[array[0]], array.slice(1).join('/'), file)
+	return newRoot
 }
 
-export const deleteFromRoot = (root,url) => {
+export const deleteFromRoot = (root, url) => {
 	const array = pathArray(url)
+	const newRoot = JSON.parse(JSON.stringify(root))
 	const toRemove = array.pop()
-	if(array.length === 0){
-		if(root.type === 'directory'){
-			delete root.content[toRemove]
+	if (array.length === 0) {
+		if (newRoot.type === 'directory') {
+			delete newRoot.content[toRemove]
 		}
-		return JSON.parse(JSON.stringify(root))
+		return newRoot
 	}
 	array.push(toRemove)
-	root.content[array[0]] = deleteFromRoot(root.content[array[0]],array.slice(1).join('/'))
-	return JSON.parse(JSON.stringify(root))
+	newRoot.content[array[0]] = deleteFromRoot(newRoot.content[array[0]], array.slice(1).join('/'))
+	return newRoot
 }
 
 
@@ -71,14 +72,14 @@ export const createFileObject = (name, creator, url, size, directory) => {
 		name,
 		size,
 		creator,
-		url: array.length !== 0 ? `root/${array.join('/')}/${name}` : `root/${name}`
+		url: array.length !== 0 ? `root/${array.join('/')}/${name}` : `root/${name}`,
 	}
-	if (directory){
+	if (directory) {
 		file.type = 'directory'
 		file.content = {}
 	} else {
 		const lastPeriod = name.lastIndexOf('.')
-		if(lastPeriod <= 0){
+		if (lastPeriod <= 0) {
 			file.type = 'system'
 		} else {
 			file.type = name.slice(lastPeriod)

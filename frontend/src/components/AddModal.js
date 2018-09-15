@@ -1,23 +1,23 @@
 import React, { Component } from 'react'
 import Modal from 'react-responsive-modal'
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Switch from '@material-ui/core/Switch';
+import FormControlLabel from '@material-ui/core/FormControlLabel'
+import Switch from '@material-ui/core/Switch'
 import { withRouter } from 'react-router'
 import { createFileObject } from './../utils/_helper'
 
 
 class AddModal extends Component {
 	state = {
-		name: "",
-		creator: "",
+		name: '',
+		creator: '',
 		directory: false,
-		size: ""
+		size: ''
 	}
 
 	handleInput = (event) => {
-		if(event.target.name === "name"){
+		if(event.target.name === 'name'){
 			if(!(/^$|^[a-zA-Zа-яА-Я0-9_.!]+$/.test(event.target.value.trim()))) return 
-		} else if (event.target.name === "creator"){
+		} else if (event.target.name === 'creator'){
 			if(!(/^$|^[a-zA-Z]+$/.test(event.target.value))) return 
 		} else {
 			if(!(/^$|^[0-9]+$/.test(event.target.value))) return
@@ -29,7 +29,7 @@ class AddModal extends Component {
 	}
 
 	handleChange = name => event => {
-		this.setState({ [name]: event.target.checked });
+		this.setState({ [name]: event.target.checked })
 	}
 
 	handleSubmit = () => {
@@ -38,6 +38,13 @@ class AddModal extends Component {
 		const file = createFileObject(name,creator,url,size,directory)
 		const valid = !!(name.length && creator.length)
 		valid && this.props.addFileToRoot(url,file)
+		this.setState({
+			name: '',
+			creator: '',
+			directory: false,
+			size: ''
+		})
+		this.props.onCloseModal()
 	}
 
 	render() {
@@ -51,14 +58,16 @@ class AddModal extends Component {
 						<div className="panel-heading">Add File</div>
 						<div className="panel-body">
 							<div className="input-group input-group-lg">
-							<FormControlLabel className="switch-label" control={
-							<Switch
-								checked={this.state.directory}
-								onChange={this.handleChange('directory')}
-								color="primary"
-								value="checkedA"
-							/>}
-							label="Is Directory ?" />
+								<FormControlLabel className="switch-label" control={
+									<Switch
+										checked={directory}
+										onChange={this.handleChange('directory')}
+										color="primary"
+										value="checkedA"
+									/>}
+								label="Is Directory ?"
+								classes={{label: 'switch-label'}}
+								/>
 							</div>
 							<div className="input-group input-group-lg">
 								<span className="input-group-addon"><i className="fa fa-file-o" aria-hidden="true"></i></span>

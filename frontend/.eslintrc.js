@@ -3,7 +3,6 @@ module.exports = {
         "browser": true,
         "es6": true
     },
-    "extends": "eslint:recommended",
     "parserOptions": {
         "ecmaFeatures": {
             "jsx": true
@@ -14,6 +13,7 @@ module.exports = {
     "plugins": [
         "react"
     ],
+    "parser": "babel-eslint",
     "rules": {
         "indent": [
             "error",
@@ -30,6 +30,10 @@ module.exports = {
         "semi": [
             "error",
             "never"
-        ]
+        ],
+        "no-tabs": 0,
+
+        "no-restricted-syntax": ["error", "ForInStatement", "LabeledStatement", "WithStatement"]
+    
     }
 };

@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import File from './File'
 import { withRouter } from 'react-router'
-import { ContextMenuTrigger } from "react-contextmenu"
+import { ContextMenuTrigger } from 'react-contextmenu'
 import RightClickMenu from './RightClickMenu'
- class Directory extends Component {
+class Directory extends Component {
 	state = {
 		selected: null,
 	}

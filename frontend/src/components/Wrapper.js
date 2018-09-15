@@ -14,7 +14,7 @@ export default class Wrapper extends Component {
 	state = {
 		currentDirectory: [],
 		directories: [],
-		activePath: "",
+		activePath: '',
 	}
 
 
@@ -36,7 +36,6 @@ export default class Wrapper extends Component {
 		const root = this.props.root
 		const newRoot = newProps.root
 		if(root !== newRoot){
-			console.log("Root Got Changed")
 			this.updateCurrentDirectory(this.props.location.pathname)
 		}
 	}
