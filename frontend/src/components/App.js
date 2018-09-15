@@ -4,9 +4,8 @@ import Wrapper from './Wrapper'
 
 /* Import Utils */
 import { getRootDirectory } from './../utils/_explorerAPI'
-
-
-
+import { addToRoot } from './../utils/_helper'
+ 
 export default class App extends Component {
 	state = {
 		root : {}
@@ -21,6 +20,12 @@ export default class App extends Component {
 			})
 	}
 
+	addFileToRoot(url,file){
+		this.setState({
+			root: addToRoot(root, url, file)
+		})
+	}
+
 	render(){		
 		return (
 			<Switch>
@@ -29,7 +34,7 @@ export default class App extends Component {
 				)}/>
 				<Route
 					path="/:path"
-					render={(props) => <Wrapper {...props} root={this.state.root} />}
+					render={(props) => <Wrapper {...props} root={this.state.root} addFileToRoot={ this.addFileToRoot.bind(this) } />}
 				/>
 			</Switch>
 		)

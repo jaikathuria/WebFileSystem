@@ -34,3 +34,10 @@ export const getCurrentDirectory = (url,root) => {
 	if(root.type !== 'directory') return null
 	return Object.values(root.content)
 }
+
+
+export const addToRoot = (root, url, file) => {
+	root = JSON.parse(JSON.stringify(root))
+	 // Logic to Add File to given url of the root
+	return root	
+}

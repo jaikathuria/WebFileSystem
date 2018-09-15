@@ -26,10 +26,6 @@
     -webkit-box-shadow: none;
 }
 
-.metismenu-container:hover {
-    
-}
-
 .metismenu-link.active  {
     background: inherit;
     color: #f53
@@ -164,4 +160,16 @@ ol.breadcrumb {
 }
 .padding-top-50 {
     padding-top: 50px;
+}
+
+.input-group {
+    margin-top: 20px;
+}
+
+.MuiTypography-root-034.MuiTypography-body1-043.MuiFormControlLabel-label-04 {
+    font-size: 18px;
+}
+
+.MuiSwitchBase-input-017 , .MuiSwitch-icon-06.MuiSwitch-iconChecked-07{
+    color: #337ab7
 }

@@ -1,13 +1,16 @@
 import React, { Component } from 'react'
 import Navbar from './Navbar';
-import Directory from './Directory';
-import Modal from 'react-responsive-modal'
+import Directory from './Directory'
+import InfoModal from './InfoModal'
+import AddModal from './AddModal'
+
 
 export default class Explorer extends Component {
 	
 	state = {
 		query: "",
-		open: false,
+		infoOpen: false,
+		addOpen: false,
 		info: null
 	}
 
@@ -16,20 +19,38 @@ export default class Explorer extends Component {
 			query
 		})
 	}
+
 	onOpenModal = (file) => {
-		this.setState({ open: true, info: file })
+		this.setState({ infoOpen: true, info: file })
 	}
 	
 	onCloseModal = () => {
-		this.setState({ open: false, info: null });
+		this.setState({ infoOpen: false, info: null });
+	}
+
+	onOpenAdd = () => {
+		this.setState({ addOpen: true })
+	}
+
+	onCloseAdd = () => {
+		this.setState({ addOpen: false })
 	}
 
 
+	componentDidUpdate(newProps){
+		if(this.props.currentDirectory !== newProps.currentDirectory){
+			this.setState({
+				query: ""
+			})
+		}
+	}
+
 	render(){
 		let {currentDirectory} = this.props
-		const { query, open, info } = this.state
-		if (query.trim() !== ""){
-			currentDirectory = currentDirectory.filter(file => file.name.match(query) !== null)
+		const { query, infoOpen, info, addOpen } = this.state
+		const validQuery = (query.trim() !== "")
+		if (validQuery){
+			currentDirectory = currentDirectory.filter(file => file.name.toLowerCase().match(query.toLowerCase()) !== null)
 		} 
 		return (
 			<div className="container-fluid margin-left-280">
@@ -37,35 +58,19 @@ export default class Explorer extends Component {
 				<Directory
 					currentDirectory={currentDirectory}
 					openModal={this.onOpenModal.bind(this)}
+					openAdd={this.onOpenAdd.bind(this)}
+					query={validQuery}
 				/>
-				<Modal open={open} onClose={this.onCloseModal} center classNames={{ overlay: 'custom-overlay', modal: 'custom-modal' }}>
-					<div className="contanier padding-top-50">
-						<div className="panel panel-default">
-							<div className="panel-heading">
-								<h3 className="panel-title">Name</h3>
-							</div>
-							<div className="panel-body">
-								{info && info.name}
-							</div>
-						</div>
-						<div className="panel panel-default">
-							<div className="panel-heading">
-								<h3 className="panel-title">Location</h3>
-							</div>
-							<div className="panel-body">
-								{info && info.url}
-							</div>
-						</div>
-						<div className="panel panel-default">
-							<div className="panel-heading">
-								<h3 className="panel-title">Type</h3>
-							</div>
-							<div className="panel-body">
-								{info && info.type}
-							</div>
-						</div>
-					</div>
-				</Modal>
+				<InfoModal 
+					open={infoOpen}
+					info={info}
+					onCloseModal={this.onCloseModal.bind(this)}
+				/>
+				<AddModal 
+					open={addOpen}
+					addFiletoRoot={this.props.addFiletoRoot}
+					onCloseModal={this.onCloseAdd.bind(this)}
+				/>
 			</div>
 		)
 	}

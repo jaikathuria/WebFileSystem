@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import File from './File'
 import { withRouter } from 'react-router'
-import { ContextMenu, MenuItem, ContextMenuTrigger } from "react-contextmenu"
- 
+import { ContextMenuTrigger } from "react-contextmenu"
+import RightClickMenu from './RightClickMenu'
  class Directory extends Component {
 	state = {
 		selected: null,
@@ -23,7 +23,7 @@ import { ContextMenu, MenuItem, ContextMenuTrigger } from "react-contextmenu"
 		})
 	}
 
-	handClick(e,data,target){
+	handleClick(e,data,target){
 		if(data.type === 'OPEN'){
 			this.props.history.push(`/${target.getAttribute('url')}`)
 		} else if (data.type === 'INFO') {
@@ -35,7 +35,7 @@ import { ContextMenu, MenuItem, ContextMenuTrigger } from "react-contextmenu"
 	}
 
 	render(){
-		const { currentDirectory } = this.props
+		const { currentDirectory, query } = this.props
 		return (
 			<section className="row directory">
 				{
@@ -55,28 +55,10 @@ import { ContextMenu, MenuItem, ContextMenuTrigger } from "react-contextmenu"
 							/>
 						</ContextMenuTrigger>)
 				}
-				<ContextMenu id={'DIRECTORY_CONTEXT_MENU'} >
-					<MenuItem data={{type: 'OPEN'}} onClick={this.handClick.bind(this)}>
-						OPEN
-					</MenuItem>
-					<MenuItem data={{type: 'INFO'}} onClick={this.handClick.bind(this)}>
-						GET INFO
-					</MenuItem>
-					<MenuItem data={{type: 'DELETE'}} onClick={this.handClick.bind(this)}>
-						DELETE
-					</MenuItem>
-				</ContextMenu>
-				<ContextMenu id={'FILE_CONTEXT_MENU'} >
-					<MenuItem data={{type: 'INFO'}} onClick={this.handClick.bind(this)}>
-						GET INFO
-					</MenuItem>
-					<MenuItem data={{type: 'DELETE'}} onClick={this.handClick.bind(this)}>
-						DELETE
-					</MenuItem>
-				</ContextMenu>
-				{currentDirectory && <File 
+				<RightClickMenu handleClick={this.handleClick.bind(this)}/>
+				{currentDirectory && !query && <File 
 					file={{type: 'add-file', name: 'Add New File'}}
-					setSelected={()=>{}}
+					setSelected={this.props.openAdd}
 				/>}
 			</section>
 		)

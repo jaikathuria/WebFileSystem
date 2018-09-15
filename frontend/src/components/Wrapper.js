@@ -54,7 +54,8 @@ export default class Wrapper extends Component {
 					LinkComponent={SideMenu}
 				/>
 				<Explorer 
-					currentDirectory={this.state.currentDirectory} 
+					currentDirectory={this.state.currentDirectory}
+					addFiletoRoot={this.props.addFiletoRoot}
 				/>
 			</div>
 		)
